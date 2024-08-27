@@ -1,0 +1,35 @@
+class Solution:
+    def validSubarraySize(self, nums: List[int], threshold: int) -> int:
+        """
+        这一题跟84题很像
+        """
+
+        stack = []
+
+        for i in range(len(nums)):
+            if nums[i] > threshold:
+                return 1
+            
+            while stack and nums[stack[-1]] > nums[i]:
+                mid = stack.pop()
+                if stack:
+                    length = i - stack[-1] - 1
+                else:
+                    length = i
+                if nums[mid] * length > threshold:
+                    return length
+
+            stack.append(i)
+        
+        # handle all increasing array
+        while stack:
+            mid = stack.pop()
+            if stack:
+                length = len(nums) - stack[-1] - 1
+            else:
+                length = len(nums)
+
+            if nums[mid] * length > threshold:
+                    return length
+        
+        return -1

@@ -1,5 +1,8 @@
 class Solution:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+        """
+        可以去复习一下1514题，那一题也是用一个数据结构来确保不走回头路
+        """
         edge = defaultdict(list)
         for u, v, w in flights:
             edge[u].append((v, w))

@@ -1,0 +1,33 @@
+class Solution:
+    """
+    We define a nested class Node here,
+    when you try to access it, use self.Node
+    """
+
+    """
+    In python, instance variables are accessed directly using the dot . notation on 
+    an instance of a class. This is different from Java
+    """
+    class Node:
+        def __init__(self, ch, count):
+            self.ch = ch
+            self.count = count
+
+    def removeDuplicates(self, s: str, k: int) -> str:
+
+        stack = []
+
+        for c in s:
+            if stack and c == stack[-1].ch:
+                stack[-1].count += 1
+                if stack[-1].count == k:
+                    stack.pop()
+            else:
+                stack.append(self.Node(c, 1))
+        
+        res = []
+
+        for node in stack:
+            res.append(node.ch * node.count)
+        
+        return ''.join(res)
